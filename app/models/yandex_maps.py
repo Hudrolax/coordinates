@@ -1,13 +1,8 @@
 from urllib.parse import urlparse, parse_qs
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import (
-    StaleElementReferenceException,
-    ElementClickInterceptedException,
-)
 import undetected_chromedriver as uc
 import os
 from time import sleep
@@ -176,6 +171,7 @@ class YandexMaps:
         wait = WebDriverWait(self.driver, 2)
         text_area = wait.until(EC.visibility_of(text_area))
 
+        text_area.clear()
         text_area.send_keys(f' {text}')
         sleep(random.uniform(0.3, 0.6))
         text_area.send_keys(Keys.ENTER)
