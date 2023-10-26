@@ -171,7 +171,12 @@ class YandexMaps:
         wait = WebDriverWait(self.driver, 2)
         text_area = wait.until(EC.visibility_of(text_area))
 
-        text_area.clear()
+        text_area.send_keys(Keys.CONTROL, 'a')
+        sleep(random.uniform(0.3, 0.6))
+
+        text_area.send_keys(Keys.DELETE)
+        sleep(random.uniform(0.3, 0.6))
+        
         text_area.send_keys(f' {text}')
         sleep(random.uniform(0.3, 0.6))
         text_area.send_keys(Keys.ENTER)
