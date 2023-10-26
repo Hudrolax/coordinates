@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  coordinates_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - DEV=${DEV}
+        - VNC_PASS=${VNC_PASS}
+    init: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "3m"
+        max-file: "3"
+    # restart: always
+    environment:
+      - PAGE_URL=${PAGE_URL}
+      - TOKEN=${TOKEN}
+    ports:
+      - 5901:5900
+    volumes:
+      - ./app:/app
+    shm_size: '3g'
+
+  proxy:
+    build:
+      context: ./proxy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "3m"
+        max-file: "3"
+    # restart: always
+    depends_on:
+      - coordinates_api
+    ports:
+      - 8000:8000
+    environment:
+      - LISTEN_PORT=8000
