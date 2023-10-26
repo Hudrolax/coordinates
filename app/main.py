@@ -16,7 +16,7 @@ logger = logging.getLogger('yandex_maps_api')
 
 yandex_maps_kwargs = dict(
     page_url=PAGE_URL,
-    headless=True,
+    headless=False,
 )
 
 app = FastAPI(
